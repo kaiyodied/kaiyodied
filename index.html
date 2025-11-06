@@ -6,15 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>kai + seli ❤️ future plans</title>
 <style>
-  /* General Styles */
   body, html {
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
-    background: #000;
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at center, #000010 0%, #000 100%);
     color: #00f0ff;
     overflow-x: hidden;
-    cursor: pointer;
   }
 
   h1, h2, h3 {
@@ -25,14 +23,14 @@
     font-size: 3em;
     text-align: center;
     color: #00f0ff;
-    text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
+    text-shadow: 0 0 15px #00f0ff, 0 0 30px #00ffff;
     animation: glow 2s ease-in-out infinite alternate;
-    margin-top: 40px;
+    margin-top: 50px;
   }
 
   h2 {
     font-size: 2em;
-    color: #00aaff;
+    color: #00c8ff;
     margin-bottom: 0.5em;
   }
 
@@ -44,22 +42,30 @@
   section {
     padding: 80px 20px;
     min-height: 100vh;
-    transition: all 1s ease;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+  }
+
+  section.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .section-container {
-    max-width: 800px;
+    max-width: 850px;
     margin: auto;
-    background: rgba(0, 0, 50, 0.3);
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 0 30px #00f0ff;
-    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    background: rgba(0, 10, 40, 0.4);
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 0 40px #00f0ff33;
+    backdrop-filter: blur(8px);
+    transition: transform 0.8s ease, box-shadow 0.8s ease;
   }
 
   .section-container:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 50px #00ffff;
+    transform: scale(1.03);
+    box-shadow: 0 0 60px #00ffff88;
   }
 
   ul {
@@ -70,23 +76,21 @@
   li {
     margin: 10px 0;
     font-size: 1.2em;
-    transition: color 0.3s ease, transform 0.3s ease;
+    transition: color 0.4s ease, transform 0.4s ease;
     cursor: pointer;
   }
 
   li:hover {
-    color: #ffffff;
+    color: #fff;
     text-shadow: 0 0 10px #00f0ff;
     transform: translateX(10px);
   }
 
-  /* Glowing animation */
   @keyframes glow {
-    from { text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff; }
-    to { text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff; }
+    from { text-shadow: 0 0 10px #00f0ff, 0 0 30px #00f0ff; }
+    to { text-shadow: 0 0 20px #00ffff, 0 0 50px #00ffff; }
   }
 
-  /* Background Effects */
   .background {
     position: fixed;
     top: 0;
@@ -113,7 +117,7 @@
     height: 20px;
     background: transparent;
     pointer-events: none;
-    font-size: 20px;
+    font-size: 22px;
     animation: heartFloat 3s ease-out forwards;
   }
 
@@ -124,23 +128,20 @@
   }
 
   @keyframes heartFloat {
-    0% { transform: translateY(0) scale(1); opacity: 1; }
-    100% { transform: translateY(-200px) scale(1.5); opacity: 0; }
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+    100% { transform: translate(calc(-60px + 120px * var(--xdir)), -200px) rotate(360deg); opacity: 0; }
   }
 
-  /* Smooth Scroll */
   html {
     scroll-behavior: smooth;
   }
 
-  /* Section Titles */
   .section-title {
     text-align: center;
     margin-bottom: 20px;
     text-shadow: 0 0 5px #00f0ff;
   }
 
-  /* Heart Icon */
   .heart {
     color: #ff4d6d;
     animation: heartbeat 1s infinite;
@@ -160,7 +161,6 @@
 
 <h1>kaikai + kaykay <span class="heart">❤️</span></h1>
 
-<!-- Names Section -->
 <section id="names">
   <div class="section-container">
     <h2 class="section-title">names</h2>
@@ -171,18 +171,15 @@
   </div>
 </section>
 
-<!-- Future Children Section -->
 <section id="children">
   <div class="section-container">
     <h2 class="section-title">names for future children 🧑‍🧑‍🧒</h2>
-
     <h3>boy</h3>
     <ul>
       <li><strong>kai jr.</strong></li>
       <li>kyros</li>
       <li>karlson</li>
     </ul>
-
     <h3>girl</h3>
     <ul>
       <li><strong>haven</strong></li>
@@ -192,7 +189,6 @@
   </div>
 </section>
 
-<!-- Pets Section -->
 <section id="pets">
   <div class="section-container">
     <h2 class="section-title">pets</h2>
@@ -208,8 +204,8 @@
 <script>
   const background = document.getElementById('background');
   const heartSound = document.getElementById('heartSound');
+  const sections = document.querySelectorAll('section');
 
-  // Floating Particles
   function createParticle() {
     const particle = document.createElement('div');
     particle.classList.add('particle');
@@ -222,19 +218,26 @@
     background.appendChild(particle);
     setTimeout(() => particle.remove(), 15000);
   }
-  setInterval(createParticle, 300);
+  setInterval(createParticle, 250);
 
-  // Click to spawn hearts
   document.body.addEventListener('click', (e) => {
     const heart = document.createElement('div');
     heart.classList.add('heart-particle');
     heart.style.left = `${e.clientX}px`;
     heart.style.top = `${e.clientY}px`;
+    heart.style.setProperty('--xdir', Math.random() - 0.5);
     heart.innerText = '❤️';
     background.appendChild(heart);
     heartSound.currentTime = 0;
     heartSound.play();
     setTimeout(() => heart.remove(), 3000);
+  });
+
+  window.addEventListener('scroll', () => {
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) section.classList.add('visible');
+    });
   });
 </script>
 
