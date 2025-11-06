@@ -151,6 +151,75 @@
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.3); }
   }
+
+  .timeline {
+    position: relative;
+    margin: 60px auto;
+    padding: 0;
+    max-width: 700px;
+  }
+
+  .timeline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, #00ffff, #0066ff);
+    box-shadow: 0 0 10px #00ffff;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin: 60px 0;
+    width: 50%;
+    padding: 20px;
+    background: rgba(0,20,40,0.6);
+    border-radius: 15px;
+    box-shadow: 0 0 20px #00f0ff55;
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease;
+  }
+
+  .timeline-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .timeline-item:nth-child(odd) {
+    left: 0;
+    transform-origin: right;
+  }
+
+  .timeline-item:nth-child(even) {
+    left: 50%;
+    transform-origin: left;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    top: 20px;
+    right: -11px;
+    width: 20px;
+    height: 20px;
+    background: #00ffff;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #00ffff;
+    animation: pulse 2s infinite;
+  }
+
+  .timeline-item:nth-child(even) .timeline-dot {
+    left: -11px;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.4); opacity: 1; }
+  }
 </style>
 </head>
 <body>
@@ -159,7 +228,7 @@
 
 <div class="background" id="background"></div>
 
-<h1>kai + seli <span class="heart">❤️</span></h1>
+<h1>kaikai + kaykay <span class="heart">❤️</span></h1>
 
 <section id="names">
   <div class="section-container">
@@ -201,10 +270,44 @@
   </div>
 </section>
 
+<section id="timeline">
+  <div class="section-container">
+    <h2 class="section-title">our future timeline 🌌</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <h3>2025 — more adventures</h3>
+        <p>exploring new cities together, late-night walks, building memories that glow brighter than the stars.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <h3>2027 — dream home</h3>
+        <p>our first apartment filled with laughter, playlists, and midnight cooking sessions.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <h3>2030 — kai jr. or haven</h3>
+        <p>starting our little family, teaching them love, kindness, and adventure.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <h3>2040 — world travel</h3>
+        <p>seeing every ocean, every skyline, hand in hand — like we always dreamed.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <h3>forever — kai + kay</h3>
+        <p>growing old together, glowing even brighter than the neon lights we started under 💙</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <script>
   const background = document.getElementById('background');
   const heartSound = document.getElementById('heartSound');
   const sections = document.querySelectorAll('section');
+  const timelineItems = document.querySelectorAll('.timeline-item');
 
   function createParticle() {
     const particle = document.createElement('div');
@@ -233,12 +336,18 @@
     setTimeout(() => heart.remove(), 3000);
   });
 
-  window.addEventListener('scroll', () => {
+  function revealElements() {
     sections.forEach(section => {
       const rect = section.getBoundingClientRect();
       if (rect.top < window.innerHeight - 100) section.classList.add('visible');
     });
-  });
+    timelineItems.forEach(item => {
+      const rect = item.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) item.classList.add('visible');
+    });
+  }
+  window.addEventListener('scroll', revealElements);
+  revealElements();
 </script>
 
 </body>
